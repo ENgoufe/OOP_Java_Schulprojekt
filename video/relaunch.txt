@@ -1,0 +1,31 @@
+verzstrultur anpassen
+frage nach laden/speichern von zuständen. alle sonstigen vaeiablen persistent 
+einfah plaxground.flags und gameObejcts wegsoeichern er JSON. muss nur member annotieren dann passt das einfach.
+
+
+collider-struktur überdenken buw dokumentieren
+
+
+gameobject: wrapper, nur Darstellung wird hier definiert. Ableitungen ändern nur Darstellung sonst nichts
+  controller
+  list<Collider>
+  
+  x,y,vx,vy
+  
+  collisionMode RAUS
+  
+  neben __init__ auch setup/reset methode
+  
+  warum braucht collider zugriff auf controller und playground??
+  
+playground: 
+  
+  OK mergr with keyboardController
+  
+  neben __init__ auch setup/reset methode
+  
+  OK elegantere Lösung wie gameMain auf keys der LEvels zugreift
+  
+  
+  
+

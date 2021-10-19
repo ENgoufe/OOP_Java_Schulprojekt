@@ -1,0 +1,208 @@
+Aktuell: 
+Alte Klassen rausmachen
+Pacman: Mehr Intelligenz für Geister, aktuell laufen die nur in Gängen auf und ab
+OK Levelcontroller verallgemeinern
+OK SPaceInvaders-Steuerung umstellen auf 4WayController
+OK breakout-level steuerung umstellen auf Level/4WayController 
+EVTL: Kollisions-Abfrage effizient regeln für den N:M Fall
+--> simpel: vor collisiondetection einfache abfrage bzgl Positionsabständen machen, falls zu gross --> break
+
+Fenstergröße regeln so dass Canvas komplett angz wird!
+panning!!
+OK levelcontroller als oberklasse
+OK spaceinvaders und breakout mit Levelcontrollers lösen
+OK, more or less levelcontroller ohne assoziiertes GameObject in einen Playground einsetzen
+doku: levelController, Simple4WayController etc
+oberklassen von Eldradorlevels machen, MousePickerLevel/EldradorLevel oder sowas...
+breite eines Objekts abfragen!
+doku: was ist Bedeutung von Koordinaten?
+dynamic state objects for gameobjct: beispiel: objecte die per accel gest werden. kein xyvxvy mehr in gameobjcts
+
+
+
+ALT:
+
+OK Code formatieren!
+
+OK JavaDoc!
+
+OK gamemain/prog2shooter
+
+OK collider:
+- OK offsets zur Objektmitte!! sonst kann man keine sinnvollen CompCollider bauen
+
+OK alle Objecte als Factories bauen! Konstruktor macht nur die unabdingbaren Sachen, der Rest wird per
+Default-Werte gesetzt!
+- in GameObject: addControllers, setControllers, setArtist, addCollider, setColliders
+- abgeleitete Objects haben eigene/andere factry MEthoden die aber dann die abgel Klasse zurückgeben
+Wie heisst das design-Pattern?
+
+
+
+perspekt später!!:
+
+später!!
+mehrere Controller pro Objekt, sinnvoll? gravity?
+
+was ist mit seitlichem panning? Bei jump an run? --> JumpRun-Level
+
+dynamic state objects for gameobjct: beispiel: objecte die per accel gest werden. kein xyvxvy mehr in gameobjcts
+
+
+
+
+
+
+-------------------------------------
+
+OK egocontroller ableitbatr machen
+
+OK RectangleObject
+
+
+OK git repo!
+
+OK setFlag/utilityfns etc über gameobject/controller duplizieren!
+
+OK Konstruktoren der Objekte redesignen
+ - OK alles ist nur Aggregation von GameObject, ableitungen von GameObject sind nur shortcuts für verschiedene zusammen
+   stellungen
+ - OK setProperty für aggregierte GameObjects erstellen so dass synamisch eigenschaften gesetz werden können!
+ - OK getProperty, similar!
+
+
+OK
+NEIN! nicht nötig da Levels lineare Vererbung haben dürfen
+OK applyGameLogic --> dummy-Objekt? Wäre gut denn dann könnte man demselben Level
+eine andere Logik unterschieben ohne dessen Code zu ändern?
+
+OK AnimatedGameObject neuer Kosntr!!
+
+OK ObjectDrawer Klasse bauen!!
+
+OK Playground-Instanzen geben ihre eigene Größe vor!
+-->Fintetuning! Passt noch nicht ganz zu canvas!
+
+OK Fixen: GameOver, restart, Point deduction when ego colls with enemy
+
+OK Fixen: Layout für Buttons
+
+OK EClipse import
+
+
+
+
+
+------------------
+
+OK gametime-abhängigkeit aus allen Interfaces rausnehmen!
+
+OK Regelung der Tastturstueerung für ego-object etc. Wer darf Eingaben verarbeiten?
+OK braucht man diese HashMap wirklich?
+OK --> HashMap: Liste von KEyEvents/MouseEvents
+
+OK Aufjeden Fall: Tastatursteuerung --> egoObjectController
+
+
+flags setzen:
+  - OK globales Falg verziechnis als static member in Playground
+  - OK playground: setGlobalFlag (präfix /global/)
+  - OK playground: setLevelFlag (prfix /level-id/)
+  - OK object: setObjectFlag (prafx: /level-id/object-id/)
+  - OK separate global and level flags so that we can can reste levels but keep globals
+  - OK einfachere Art mutable Objekte zu verwalten für zB hittTRwiceLevel. Rehvt komplex!
+
+
+playground/spaceinvaders
+- OK laden der animationen vereinfachen!
+- OK pause: wird von GameMain gemanagaed und gesetzt. Level KANN isPaused() abfragen und selbst reagieren
+  muss aber nicht.
+- OK ressourcen management per level. jede ressource wird nur 1x geladen, jedes objekt kann sie dann per Flag holen?
+OK definierter ablauf wie initialisiert wird. am angang 1x: global, level, objektee, controller, ...
+Umsetzung:
+- globale Initialisierung kann per Dummy-Level erfolgen: setzt globale Flags, läft ressourcen
+- alle LEvel haben nur eine Setup-Methode, die genau einmal beim Erzeugen aufgerufen wird. prepareLevel
+- alle Level können flags abfragen, um globale Ressourcen zu holen die im Dummy-Level geladen wurden.
+- alle Objekte machen ihr Setup im Konstruktor, sie werden in jedem Level neu erzeugt.
+
+
+mainLoop
+OK - vzereinfachen!!!
+OK - reset eines Levels klar definieren: prepareLelvel? reset?
+
+OK gametime ist global flag --> raus! Access über Playground!
+
+OK pfade anpassen
+
+OK playground/* Levels bereinigen!
+
+OK newAction ist volatile, warum? Effekt des println!!
+
+------------------
+
+
+
+ideen für aufgaben:
+zwischenlevel designen: ego-object fällt runter, sagt was, etc...
+pausen-Screen designen!
+Ellipse-Collider!
+aliens shiessen auf egoobject
+schild für egoObject
+1 GameMain: neuen Steuerknopf "new Game" belegen!
+highscore-level designen mit Tastatureingaben im TextObject das sich selbst erweitert!
+hittwiceLevel
+bosslevel
+für die Guten: EgoObjectController übernehmen und neues spiel bauen, zB jump and run! pacman! Breakout!
+state trnsitions in level: start/starting/...
+jedes level soll highscore laden und anzeigen
+#tastatursteuerung verbessern PROFIS!! bei space wieterfliegen!
+statische Mine einbauen!
+jump and run, level
+
+- BossLevel: schiesst auf mich!
+- zwischenlevel designen: Get ready for XXX, Ego-Objekt fähr quer über Bildschirm
+- schild für Ego-Objekt
+- GameMain: neuen Steuerknopf mit "new game" belegen
+- HitTwiceLevel
+- statische Hindernisse einbauen ein eigenem Level --> BlockObject
+- HighScores speichern nach GameOver ODER level vorbei, laden vor jedem Level in prepareLevel
+- Zahl der Feinde, Geschwindigkeit variieren, Schussfrequenz + Neue Level Grussworte, state machine
+    anpassen
+- Feinde lassen TextObject fliegen wenn Sie getroffen werden
+- Ego lässt TextObject fliegen wenn es getroffen wird
+- Collectibles einführen, Leben geben fûr Collectables
+- Collectibles machen für 5 sekunden unverwundbar
+- breakout-level für die Guten! vorstrukturieren!
+- jump and run level für die Guten! vorstrukturieren!
+- animationseditor
+
+
+
+
+
+-------------
+
+Anforderungen/use-cases:
+- ego-Objekt soll verschiedene Logiken haben können obwohl es gleich aussieht wird.
+  a) Level: Tastatureingaben abfragen und reazgieren, Kollisionen
+  b) Zwischenscreen-Animation, ferngetsuert
+  c) verschieden unabhängige Logiken sollen kombinierbar sein, also etwa: Schwerkraft und Steuerung,
+     Steuerung und Kollision mit Hindernissen
+
+- ego-objekt soll in verschiedenen Levels selbe Steuerung haben aber anders auf Collisions reagieren
+--> Kollisionsabfrage NICHT in EgoController sondern in applyGameLogoc oder analogon
+
+- Änderung einzelner Level-Eigenschaften soll ganz wenig Code benötigen!
+
+- selbe Grafikobjekte sollen in verschiedenen Situationen wiederverwendbar sein, versch verhalten, Farben, Animationsmodus, ... ZB TextObject, FallingStar, ...
+
+- Kollisionen sollen unabhängig von allen anderen Eigenschaften sein --> kombinierbar.
+
+- Kollisionen sollen erweiterbar sein: Mask, Ellipse, ...
+
+
+
+
+
+
+
